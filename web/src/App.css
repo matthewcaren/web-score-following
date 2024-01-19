@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+div {
+  /* border: 1px solid red; */
+}
+
+.layered-canvas-wrapper {
+  position: relative;
+}
+
+.layered-canvas-wrapper canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
