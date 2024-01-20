@@ -1,19 +1,19 @@
-Piece,Audio,Artist/Conductor ID,Notes
-Dvořák_StringQuartet12_1,https://youtu.be/DxtAHpYIXdU,Cleveland,2:24 to end
-Dvořák_StringQuartet12_1,https://youtu.be/_b_rwtDlUXA,Emerson,2:28 to end
-Dvořák_StringQuartet12_1,https://youtu.be/HrqgMrwG4i0,NY,2:29 to end
-Mozart_DiesIrae,https://www.youtube.com/watch?v=0T7eMctuJLQ,Abbado,
-Mozart_DiesIrae,https://www.youtube.com/watch?v=1Tb9HmlPuVI,Bernstein,
-Mozart_DiesIrae,https://www.youtube.com/watch?v=ARO7ZjsXSkE,Schreier,
-Mozart_Symphony40 1,https://www.youtube.com/watch?v=p8bZ7vm4_6M,Bernstein,
-Mozart_Symphony40 1,https://www.youtube.com/watch?v=T1n9cVbwaz4,Klemperer,studio recording
-Mozart_Symphony40 1,https://www.youtube.com/watch?v=eqO3bN5_WPo,Salemkour,
-Pastorale_Beach,https://www.youtube.com/watch?v=FvKEWoZl7vg,Borealis,
-Pastorale_Beach,https://www.youtube.com/watch?v=mEOcdaP5_hs,Gianopoulos,
-Pastorale_Beach,https://www.youtube.com/watch?v=x_C_qgM9Fo0,RSC,
-Prokofiev_PianoConcerto1_1,https://www.youtube.com/watch?v=JqCwQ9clHec,Argerich,
-Prokofiev_PianoConcerto1_1,https://www.youtube.com/watch?v=PtxeUf-d0us,Berman,
-Prokofiev_PianoConcerto1_1,https://www.youtube.com/watch?v=m7dDE6fP0Uk,Kissin,
-Tchaikovsky_NutcrackerSuite_1,https://www.youtube.com/watch?v=GiEIe0ClGIM,Alphen,
+Piece,Audio,Artist/Conductor ID,Notes,Verification Vector
+Dvorak_StringQuartet12_1,https://youtu.be/DxtAHpYIXdU,Cleveland,2:24 to end,
+Dvorak_StringQuartet12_1,https://youtu.be/_b_rwtDlUXA,Emerson,2:28 to end,
+Dvorak_StringQuartet12_1,https://youtu.be/HrqgMrwG4i0,NY,2:29 to end,
+Mozart_DiesIrae,https://www.youtube.com/watch?v=0T7eMctuJLQ,Abbado,,
+Mozart_DiesIrae,https://www.youtube.com/watch?v=1Tb9HmlPuVI,Bernstein,,
+Mozart_DiesIrae,https://www.youtube.com/watch?v=ARO7ZjsXSkE,Schreier,,
+Mozart_Symphony40_1,https://www.youtube.com/watch?v=p8bZ7vm4_6M,Bernstein,,
+Mozart_Symphony40_1,https://www.youtube.com/watch?v=T1n9cVbwaz4,Klemperer,studio recording,
+Mozart_Symphony40_1,https://www.youtube.com/watch?v=eqO3bN5_WPo,Salemkour,,
+Beach_Pastorale,https://www.youtube.com/watch?v=FvKEWoZl7vg,Borealis,,
+Beach_Pastorale,https://www.youtube.com/watch?v=mEOcdaP5_hs,Gianopoulos,,
+Beach_Pastorale,https://www.youtube.com/watch?v=x_C_qgM9Fo0,RSC,,
+Prokofiev_PianoConcerto1_1,https://www.youtube.com/watch?v=JqCwQ9clHec,Argerich,,
+Prokofiev_PianoConcerto1_1,https://www.youtube.com/watch?v=PtxeUf-d0us,Berman,,
+Prokofiev_PianoConcerto1_1,https://www.youtube.com/watch?v=m7dDE6fP0Uk,Kissin,,
+Tchaikovsky_NutcrackerSuite_1,https://www.youtube.com/watch?v=GiEIe0ClGIM,Alphen,,
 Tchaikovsky_NutcrackerSuite_1,https://www.youtube.com/watch?v=syz7HVMoy6E,Ormandy,studio recording
-Tchaikovsky_NutcrackerSuite_1,https://www.youtube.com/watch?v=jA1-3Xgpf7Q,Rostropovich,
+Tchaikovsky_NutcrackerSuite_1,https://www.youtube.com/watch?v=jA1-3Xgpf7Q,Rostropovich,,
