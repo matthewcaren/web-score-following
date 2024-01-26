@@ -1,7 +1,7 @@
-import numpy as np
 import librosa
 import os, sys
 import csv
+from verification_utils import loudness, verif_array_to_str
 
 sys.tracebacklimit = 0
 
@@ -9,7 +9,7 @@ catalog = []
 
 # read the catalog
 with open('catalog.csv', newline='') as f:
-    print('reading catalog...\n')
+    print('reading catalog...')
     reader = csv.DictReader(f)
     catalog = [line for line in reader]
 
@@ -20,7 +20,7 @@ dirs = [d for d in os.listdir('.') if os.path.isdir(os.path.join('.', d))]
 piece_dirs = [d for d in dirs if d in pieces]
 assert set(piece_dirs) == pieces, 'missing piece directories for: ' + str([p for p in pieces if p not in piece_dirs])
 
-print('verified directory structure ✅\n')
+print('verified directory structure ✅')
 
 ########
 
@@ -36,21 +36,55 @@ print('verified files match catalog ✅\n')
 
 ########
 
+verif_data = []
+
+# read verification data
+with open('verification_data.csv', newline='') as f:
+    print('reading verification data...')
+    reader = csv.DictReader(f)
+    verif_data = [line for line in reader]
+
 for dir in dirs:
     performances = [p for p in catalog if p['Piece'] == dir]
+    performances_verif_data = [p for p in verif_data if p['Piece'] == dir]
 
-    for p in performances:
+    for p, p_data in zip(performances, performances_verif_data):
         pID = p['Artist/Conductor ID']
         print(f'checking contents of {dir}/{pID}.wav', end='\r')
         sys.stdout.write('\x1b[2K')
+
+        assert pID == p_data['Artist/Conductor ID'], f'data/catalog mismatch with: {dir}/{pID}.wav'
         
-        samples, sample_rate = librosa.load(f'{dir}/{pID}.wav', sr=None)
+        samples, sample_rate = librosa.load(f'{dir}/{pID}.wav', sr=None, mono=True)
         assert sample_rate == 44100, f'{dir}/{pID}.wav does not have a sample rate of 44.1k'
 
-        verif_vec = np.array([np.mean(np.abs(samples)), np.median(np.abs(samples)), np.std(samples)])
-        verif_string = np.array2string(verif_vec, precision=3, separator=',', suppress_small=True)
-        assert verif_string == p['Verification Vector'], f'{dir}/{pID}.wav does not match expected data, this may be the wrong audio file'
+        verif_vec = loudness(samples[:44100*20], 8192, 4096)
+        verif_string = verif_array_to_str(verif_vec)
+        assert verif_string == p_data['Vector'], f'{dir}/{pID}.wav does not match expected data, this may be the wrong audio file'
 
 print('verified audio contents ✅\n')
 
-print("all looks good!")
+print("all looks good!\n")
+
+
+
+####### TO EXTRACT VERIFICATION DATA
+
+# data_lines = []
+
+# for dir in dirs:
+#     performances = [p for p in catalog if p['Piece'] == dir]
+
+#     for p in performances:
+#         pID = p['Artist/Conductor ID']
+#         samples, sample_rate = librosa.load(f'{dir}/{pID}.wav', sr=None, mono=True)
+
+#         verif_vec = loudness(samples[:44100*20], 8192, 4096)
+#         verif_string = verif_array_to_str(verif_vec)
+#         data_lines.append([p['Piece'], pID, verif_string])
+
+
+# with open('verification_data.csv', 'w', newline='') as csvfile:
+#     writer = csv.writer(csvfile)
+#     writer.writerow(['Piece', 'Artist/Conductor ID', 'Vector'])
+#     writer.writerows(data_lines)
