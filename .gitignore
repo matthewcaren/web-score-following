@@ -1,3 +1,6 @@
 web/node_modules
 .DS_Store
+*/__pycache__/*
 *.wav
+*.mp3
+*-synced.*

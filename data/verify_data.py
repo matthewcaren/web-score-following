@@ -1,7 +1,7 @@
 import librosa
 import os, sys
 import csv
-from verification_utils import loudness, verif_array_to_str
+from verification_utils import *
 
 sys.tracebacklimit = 0
 
@@ -30,7 +30,7 @@ for dir in dirs:
     for p in performances:
         pID = p['Artist/Conductor ID']
         assert f'{pID}.csv' in dir_contents, f'missing annotation file: {dir}/{pID}.csv'
-        assert f'{pID}.wav' in dir_contents, f'missing audio file: {dir}/{pID}.wav'
+        assert f'{pID}.mp3' in dir_contents, f'missing audio file: {dir}/{pID}.mp3'
 
 print('verified files match catalog ✅\n')
 
@@ -49,18 +49,30 @@ for dir in dirs:
     performances_verif_data = [p for p in verif_data if p['Piece'] == dir]
 
     for p, p_data in zip(performances, performances_verif_data):
+        # verify WAV data
         pID = p['Artist/Conductor ID']
-        print(f'checking contents of {dir}/{pID}.wav', end='\r')
+        print(f'checking contents of {dir}/{pID}.mp3', end='\r')
         sys.stdout.write('\x1b[2K')
 
-        assert pID == p_data['Artist/Conductor ID'], f'data/catalog mismatch with: {dir}/{pID}.wav'
+        assert pID == p_data['Artist/Conductor ID'], f'data/catalog mismatch with: {dir}/{pID}.mp3'
         
-        samples, sample_rate = librosa.load(f'{dir}/{pID}.wav', sr=None, mono=True)
-        assert sample_rate == 44100, f'{dir}/{pID}.wav does not have a sample rate of 44.1k'
+        samples, sample_rate = librosa.load(f'{dir}/{pID}.mp3', sr=None, mono=True)
+        assert sample_rate == 44100, f'{dir}/{pID}.mp3 does not have a sample rate of 44.1k'
 
         verif_vec = loudness(samples[:44100*20], 8192, 4096)
         verif_string = verif_array_to_str(verif_vec)
-        assert verif_string == p_data['Vector'], f'{dir}/{pID}.wav does not match expected data, this may be the wrong audio file'
+        assert verif_string == p_data['Vector'], f'{dir}/{pID}.mp3 does not match expected data, this is probably the wrong audio file'
+
+        # process CSV / WAV
+        times = load_time_instances(f'{dir}/{pID}.csv')
+        start = max(0, times[0] - 1)
+        end = times[-1] + 1
+        
+        write_wave(samples[int(start*44100):int(end*44100)], f'{dir}/{pID}-synced.wav')
+        with open(f'{dir}/{pID}-synced.csv', 'w') as f:
+            for t in times:
+                f.write(f'{t - start}\n')
+
 
 print('verified audio contents ✅\n')
 
@@ -77,7 +89,7 @@ print("all looks good!\n")
 
 #     for p in performances:
 #         pID = p['Artist/Conductor ID']
-#         samples, sample_rate = librosa.load(f'{dir}/{pID}.wav', sr=None, mono=True)
+#         samples, sample_rate = librosa.load(f'{dir}/{pID}.mp3', sr=None, mono=True)
 
 #         verif_vec = loudness(samples[:44100*20], 8192, 4096)
 #         verif_string = verif_array_to_str(verif_vec)
