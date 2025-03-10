@@ -1,7 +1,9 @@
-# web-score-following
+# web score following
 Real-time score following on the web, via a framework that runs Python signal-processing code in the browser. This repository includes both code for the web implementation as well an annotated downbeat dataset to measure its performance.
 
 Developed as part of the [ConcertCue](https://concertcue.org/) project at the MIT Music Technology Lab.
+
+Presented at Web Audio Conference (WAC) 2024.
 
 
 ## Running the system
@@ -25,4 +27,4 @@ To use the dataset, download the audio files from the links (as MP3) and make su
 ```
 python verify_data.py
 ```
-This script will check attributes of the local audio files against expected values to verify that you have the correct audio data. It will also extract the correct audio exerpts from the downloaded audio clips and create **aligned** files (`*-aligned.csv` and `*-aligned.wav`), which contain the processed, ready-to-use audio/annotation paired data. These are the files used to test performance.
+This script will check attributes of the local audio files against expected values to verify that you have the correct audio data. It will also extract the correct audio excerpts from the downloaded audio clips and create **aligned** files (`*-aligned.csv` and `*-aligned.wav`), which contain the processed, ready-to-use audio/annotation paired data. These are the files that should be used to test performance.
